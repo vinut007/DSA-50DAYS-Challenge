@@ -1,0 +1,39 @@
+class Solution {
+    public List<String> commonChars(String[] words) {
+        HashMap<String,Integer> ref=new HashMap<>();
+        for(int i=97;i<=122;i++){
+                String s= String.valueOf((char)i);
+                ref.put(s,1000);                    
+        }
+
+        for(String s:words){
+            HashMap<String,Integer> h=new HashMap<>();
+            for(char i:s.toCharArray()){
+                //load one word into hashmap
+                String x=String.valueOf(i);
+                h.put(x,h.getOrDefault(x,0)+1);
+            }
+
+        //Now compare with main ref table and update with minimum value
+        //update the ref table for ever y string lol
+        for(char j='a';j<='z';j++){  //this is to check is element is present or not
+            String x=String.valueOf(j);
+            int x1=ref.get(x);
+            int x2=h.getOrDefault(x,0);
+            ref.put( x , (Math.min(x1,x2)));
+        }
+
+        }
+        List<String> a=new ArrayList<>();
+        for(char j='a';j<='z';j++){
+            String y=String.valueOf(j);
+            int x=ref.get(y);
+            if(x<1000){
+            for(int i=0;i<=x-1;i++){
+                a.add(y);
+            }
+            }
+        } 
+        return a;
+    }
+}
